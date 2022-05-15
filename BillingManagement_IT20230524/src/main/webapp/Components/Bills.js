@@ -1,5 +1,14 @@
+$(document).ready(function(){
+if ($("#alertSuccess").text().trim() == "")
+{
+$("#alertSuccess").hide();
+}
+$("#alertError").hide();
+});
+
 $(document).on("click", "#btnSave", function(event)
-{ 
+{
+
 // Clear alerts---------------------
  $("#alertSuccess").text(""); 
  $("#alertSuccess").hide(); 
@@ -30,6 +39,8 @@ var type = ($("#hidBillIDSave").val() == "") ? "POST" : "PUT";
 
 function onBillSaveComplete(response, status)
 { 
+	location.reload();
+	
 if (status == "success") 
  { 
  var resultSet = JSON.parse(response); 
@@ -37,7 +48,7 @@ if (status == "success")
  { 
  $("#alertSuccess").text("Successfully saved."); 
  $("#alertSuccess").show(); 
- $("#divBliisGrid").html(resultSet.data); 
+ $("#divBillsGrid").html(resultSet.data); 
  } else if (resultSet.status.trim() == "error") 
  { 
  $("#alertError").text(resultSet.data); 
@@ -71,7 +82,6 @@ $(document).on("click", ".btnUpdate", function(event)
 
 
 
-
 $(document).on("click", ".btnRemove", function(event)
 		{ 
 		 $.ajax( 
@@ -89,6 +99,8 @@ $(document).on("click", ".btnRemove", function(event)
 		
 function onBillDeleteComplete(response, status)
 { 
+	location.reload();
+	
 if (status == "success") 
  { 
  var resultSet = JSON.parse(response); 
@@ -96,7 +108,7 @@ if (status == "success")
  { 
  $("#alertSuccess").text("Successfully deleted."); 
  $("#alertSuccess").show(); 
- $("#divBliisGrid").html(resultSet.data); 
+ $("#divBillsGrid").html(resultSet.data); 
  } else if (resultSet.status.trim() == "error") 
  { 
  $("#alertError").text(resultSet.data); 
